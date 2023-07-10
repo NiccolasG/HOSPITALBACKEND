@@ -1,0 +1,40 @@
+<h1>HOSPITAL BACKEND</h1>
+<h2>LISTADO DE MEDICOS</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>cedula</th>
+            <th>nombre</th>
+            <th>apellido</th>
+            <th>correo</th>
+            <th>Especialidad</th>
+            <th>consultorio</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        {{#each medicos}}
+        <tr>
+            {{!-- // actualizar medicos --}}
+            <form action="/medicos/actualizar/{{cedula}}" method="post">
+<td><input type="text" id="medico" name="medico" value="{{nombres}}" {{#ifCond @key '!=' ../claveSeleccionada}}{{../opcion}}{{/ifCond}}></td>
+<td><input type="text" id="apellido" name="apellido" value="{{apellidos}}" {{#ifCond @key '!=' ../claveSeleccionada}}{{../opcion}}{{/ifCond}}></td>
+<td><input type="text" value="{{cedula}}" disabled></td>
+<td><input type="text" value="{{especialidad}}" disabled></td>{{!--se realizo el cambio para desabilitar las especialidades (verificar o dejar original) --}}
+<td><input type="tel" id="consultorio" name="consultorio" value="{{consultorio}}" {{#ifCond @key '!=' ../claveSeleccionada}}{{../opcion}}{{/ifCond}}></td>
+<td><input type="tel" id="correo" name="correo" value="{{correo}}" {{#ifCond @key '!=' ../claveSeleccionada}}{{../opcion}}{{/ifCond}}></td>
+<td>
+{{#if ../estado}}
+<a href="/medicos/eliminar/{{cedula}}">Eliminar</a> <br><br>
+<a href="/medicos/enviar/{{@key}}">Actualizar</a>
+{{else}}
+<input type="submit" value="Enviar">
+{{/if}}
+</td>
+</form>
+</tr>
+{{/each}}
+</tbody>
+</table>
+<a class="volver" href="/">Volver</a>
+<a href="medicos/agregar-medico">Agregar medicos</a>

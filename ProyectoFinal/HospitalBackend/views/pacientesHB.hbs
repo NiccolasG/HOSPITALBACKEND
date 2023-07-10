@@ -1,0 +1,37 @@
+<h1>HOSPITAL BACKEND</h1>
+<h2>LISTADO DE PACIENTES</h2>
+<table border="1">
+<thead>
+<tr>
+<th>Nombre del paciente</th>
+<th>Apellido del paciente</th>
+<th>Cédula del paciente</th>
+<th>Edad del paciente</th>
+<th>Teléfono del paciente</th>
+<th>Opciones</th>
+</tr>
+</thead>
+<tbody>
+{{#each pacientes}}
+<tr>
+<form action="/pacientes/actualizar/{{cedulaPaciente}}" method="post">
+<td><input type="text" id="paciente" name="paciente" value="{{nombre}}" {{#ifCond @key '!=' ../claveSeleccionada}}{{../opcion}}{{/ifCond}}></td>
+<td><input type="text" id="apellido" name="nombre" value="{{apellido_paciente}}" {{#ifCond @key '!=' ../claveSeleccionada}}{{../opcion}}{{/ifCond}}></td>
+<td><input type="text" value="{{cedula}}" disabled></td>
+<td><input type="text" id="edad" name="edad" value="{{edad}}" {{#ifCond @key '!=' ../claveSeleccionada}}{{../opcion}}{{/ifCond}}></td>
+<td><input type="tel" id="telefono" name="telefono" value="{{telefono_paciente}}" {{#ifCond @key '!=' ../claveSeleccionada}}{{../opcion}}{{/ifCond}}></td>
+<td>
+{{#if ../estado}}
+<a href="/pacientes/eliminar/{{cedula}}">Eliminar</a> <br><br>
+<a href="/pacientes/enviar/{{@key}}">Actualizar</a>
+{{else}}
+<input type="submit" value="Enviar">
+{{/if}}
+</td>
+</form>
+</tr>
+{{/each}}
+</tbody>
+</table>
+<a class="volver" href="/">Volver</a>
+<a href="pacientes/agregar-paciente">Agregar paciente</a>
